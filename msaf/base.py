@@ -219,9 +219,10 @@ class Features(six.with_metaclass(MetaFeatures)):
         """
         try:
             # Read JSON file
+            print(self.file_struct.features_file)
             with open(self.file_struct.features_file) as f:
                 feats = json.load(f)
-
+            print('loaded')
             # Store duration
             if self.dur is None:
                 self.dur = float(feats["globals"]["dur"])
