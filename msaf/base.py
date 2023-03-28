@@ -6,19 +6,21 @@ here.
 
 import collections
 import datetime
-from enum import Enum
-import librosa
-import logging
-import jams
 import json
-import numpy as np
+import logging
 import os
+from enum import Enum
+
+import jams
+import librosa
+import numpy as np
 import six
 
 # Local stuff
 import msaf
-from msaf.exceptions import WrongFeaturesFormatError, NoFeaturesFileError,\
-    FeaturesNotFound, FeatureTypeNotFound, FeatureParamsError, NoAudioFileError
+from msaf.exceptions import (FeatureParamsError, FeaturesNotFound,
+                             FeatureTypeNotFound, NoAudioFileError,
+                             NoFeaturesFileError, WrongFeaturesFormatError)
 
 # Three types of features at the moment:
 #   - framesync: Frame-wise synchronous.
@@ -428,6 +430,10 @@ class Features(six.with_metaclass(MetaFeatures)):
                             "current parameters but no audio file was found." \
                             "Please, change your parameters or add the audio" \
                             " file in %s"
+                    elif isinstance(e, NoFeaturesFileError):
+                        msg = "NoFeaturesFileError"
+                    elif isinstance(e, WrongFeaturesFormatError):
+                        msg = "WrongFeaturesFormatError"
                     else:
                         msg = "Couldn't find audio file in %s"
                     raise NoAudioFileError(msg % self.file_struct.audio_file)
