@@ -431,9 +431,9 @@ class Features(six.with_metaclass(MetaFeatures)):
                             "Please, change your parameters or add the audio" \
                             " file in %s"
                     elif isinstance(e, NoFeaturesFileError):
-                        msg = "NoFeaturesFileError"
+                        msg = "NoFeaturesFileError file in %s"
                     elif isinstance(e, WrongFeaturesFormatError):
-                        msg = "WrongFeaturesFormatError"
+                        msg = "WrongFeaturesFormatError file in %s"
                     else:
                         msg = "Couldn't find audio file in %s"
                     raise NoAudioFileError(msg % self.file_struct.audio_file)
